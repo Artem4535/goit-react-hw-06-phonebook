@@ -4,6 +4,7 @@ import css from './PhoneBook.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
+import { nanoid } from '@reduxjs/toolkit';
 
 export function FormHandler() {
   const [name, setName] = useState('');
@@ -44,7 +45,7 @@ export function FormHandler() {
       return Notiflix.Notify.failure(`${formNumber} is already in contacts`);
     }
 
-    dispatch(addContact({ name, number }));
+    dispatch(addContact({ name, number, id: nanoid() }));
     reset();
   };
 
