@@ -1,19 +1,18 @@
-import PropTypes from 'prop-types';
 import css from './Filter.module.css';
+import { useDispatch } from 'react-redux';
+import { getVisibleContacts } from 'redux/contactsSlice';
+export default function Filter() {
+  const dispatch = useDispatch();
+  const handlerFilter = event => {
+    dispatch(getVisibleContacts(event.currentTarget.value));
+  };
 
-export default function Filter({value, onChange}) {
-    return (
-         <form className={css.form}>
-            <label className={css.find}>
-                Find by name
-                <input value={value} onChange={onChange} type="text"></input>
-            </label>
-         </form>
-    )
+  return (
+    <form className={css.form}>
+      <label className={css.find}>
+        Find by name
+        <input onChange={handlerFilter} type="text"></input>
+      </label>
+    </form>
+  );
 }
-
-
-Filter.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-};
